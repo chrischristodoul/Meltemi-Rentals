@@ -1,16 +1,12 @@
 import Link from "next/link";
-import { primaryNav, site } from "@/data/site";
-import { Button } from "@/components/ui/Button";
+import { site } from "@/data/site";
 import { Container } from "./Container";
-import { MobileNav } from "./MobileNav";
-import { NavLink } from "./NavLink";
-
-const headerNav = primaryNav.filter((item) => item.href !== "/request");
+import { NavMenu } from "./NavMenu";
 
 export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-[color:var(--color-line)] bg-[color:var(--color-bg)]">
-      <Container className="flex h-16 items-center justify-between md:h-[72px]">
+      <Container className="flex h-14 items-center justify-between md:h-16">
         <Link
           href="/"
           className="inline-flex items-center gap-2 font-semibold tracking-tight text-[color:var(--color-ink)]"
@@ -23,29 +19,7 @@ export function Header() {
           <span>{site.name}</span>
         </Link>
 
-        <nav aria-label="Primary" className="hidden md:block">
-          <ul className="flex items-center gap-1">
-            {headerNav.map((item) => (
-              <li key={item.href}>
-                <NavLink href={item.href}>{item.label}</NavLink>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div className="hidden md:flex items-center gap-4">
-          <a
-            href={`tel:${site.phone.replace(/\s+/g, "")}`}
-            className="text-sm text-[color:var(--color-ink-muted)] hover:text-[color:var(--color-brand-700)]"
-          >
-            {site.phone}
-          </a>
-          <Button href="/request" size="md">
-            Request a car
-          </Button>
-        </div>
-
-        <MobileNav />
+        <NavMenu />
       </Container>
     </header>
   );

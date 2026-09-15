@@ -47,7 +47,7 @@ export default async function RequestPage({
       {preselected ? (
         <div className="mt-6 max-w-2xl rounded-[var(--radius-md)] border border-[color:var(--color-brand-100)] bg-[color:var(--color-brand-50)] px-4 py-3 text-sm text-[color:var(--color-brand-800)]">
           Preselected: <strong>{preselected.categoryLabel}</strong> —{" "}
-          {preselected.name}, €{preselected.pricePerDayEUR}/day (all-inclusive).
+          {preselected.name}, €{preselected.pricePerDayEUR}/day all-inclusive.
           You can change the category below.
         </div>
       ) : null}

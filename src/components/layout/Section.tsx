@@ -25,7 +25,7 @@ export function Section({
     <Tag
       id={id}
       className={cn(
-        "py-14 md:py-20",
+        "py-10 md:py-16 lg:py-20",
         tone === "alt" && "bg-[color:var(--color-bg-alt)]",
         className,
       )}

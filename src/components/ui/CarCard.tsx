@@ -1,7 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { Vehicle } from "@/data/vehicles";
 import { cn } from "@/lib/cn";
+import { Button } from "./Button";
 import { Icon } from "./Icon";
 
 type Props = {
@@ -34,21 +34,18 @@ export function CarCard({
 }: Props) {
   const unavailable = status === "unavailable";
 
-  const requestHref = {
-    pathname: "/request",
-    query: {
-      category: vehicle.categorySlug,
-      ...(dates?.from && dates?.to ? { from: dates.from, to: dates.to } : {}),
-    },
-  };
+  const requestParams = new URLSearchParams({ category: vehicle.categorySlug });
+  if (dates?.from && dates?.to) {
+    requestParams.set("from", dates.from);
+    requestParams.set("to", dates.to);
+  }
+  const requestHref = `/request?${requestParams.toString()}`;
 
   return (
     <article
       className={cn(
-        "flex flex-col overflow-hidden rounded-[var(--radius-lg)] border bg-white shadow-[var(--shadow-card)]",
-        unavailable
-          ? "border-[color:var(--color-line)] opacity-80"
-          : "border-[color:var(--color-line)]",
+        "group flex flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[color:var(--color-line)] bg-white transition-shadow duration-150 hover:shadow-[var(--shadow-card)]",
+        unavailable && "opacity-80",
         className,
       )}
     >
@@ -63,11 +60,11 @@ export function CarCard({
             <h3 className="mt-1 text-lg font-semibold">{vehicle.name}</h3>
           </div>
           <p className="shrink-0 text-right">
-            <span className="text-[26px] font-semibold leading-none tracking-tight text-[color:var(--color-ink)]">
-              €{vehicle.pricePerDayEUR}
+            <span className="text-[22px] font-semibold leading-none tracking-tight text-[color:var(--color-ink)]">
+              €{vehicle.pricePerDayEUR}/day
             </span>
             <span className="mt-1 block text-[11px] text-[color:var(--color-ink-muted)]">
-              / day, all-in
+              all-inclusive
             </span>
           </p>
         </div>
@@ -109,17 +106,14 @@ export function CarCard({
               type="button"
               disabled
               aria-disabled="true"
-              className="inline-flex min-h-[44px] w-full items-center justify-center rounded-[var(--radius-md)] border border-[color:var(--color-line-strong)] bg-[color:var(--color-bg)] px-5 text-[15px] font-medium text-[color:var(--color-ink-muted)] cursor-not-allowed"
+              className="inline-flex min-h-[44px] w-full cursor-not-allowed items-center justify-center rounded-[var(--radius-md)] border border-[color:var(--color-line-strong)] bg-[color:var(--color-bg)] px-5 text-[15px] font-medium text-[color:var(--color-ink-muted)]"
             >
               Not available for these dates
             </button>
           ) : (
-            <Link
-              href={requestHref}
-              className="inline-flex min-h-[44px] w-full items-center justify-center rounded-[var(--radius-md)] bg-[color:var(--color-brand-600)] px-5 text-[15px] font-medium text-white hover:bg-[color:var(--color-brand-700)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-brand-600)]"
-            >
+            <Button href={requestHref} className="w-full">
               Request this car
-            </Link>
+            </Button>
           )}
         </div>
       </div>

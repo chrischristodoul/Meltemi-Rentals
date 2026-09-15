@@ -62,20 +62,22 @@ body {
   font-feature-settings: "cv11", "ss01";
 }
 
-h1, h2, h3, h4 {
-  color: var(--color-ink);
-  font-weight: 600;
-  letter-spacing: -0.015em;
-  line-height: 1.15;
-}
+@layer base {
+  h1, h2, h3, h4 {
+    color: var(--color-ink);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+  }
 
-h1, h2 {
-  text-wrap: balance;
-}
+  h1, h2 {
+    text-wrap: balance;
+  }
 
-/* A touch tighter on the very largest sizes, for a more premium feel. */
-h1 {
-  letter-spacing: -0.02em;
+  /* A touch tighter on the very largest sizes, for a more premium feel. */
+  h1 {
+    letter-spacing: -0.02em;
+  }
 }
 
 /* Consistent, visible focus for keyboard users */
@@ -100,6 +102,18 @@ h1 {
 }
 .skip-link:focus {
   transform: translateY(0);
+}
+
+/* Nav dropdown reveal — very short and subtle. */
+@keyframes nav-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 /* Respect reduced motion */

@@ -32,10 +32,10 @@ export type Vehicle = {
 
 export const vehicles: Vehicle[] = [
   {
-    id: "picanto",
+    id: "mirage",
     categorySlug: "economy",
     categoryLabel: "Small / Economy",
-    name: "Kia Picanto",
+    name: "Mitsubishi Mirage",
     seats: 4,
     luggage: 2,
     transmission: "manual",
