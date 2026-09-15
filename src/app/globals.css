@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand palette — carefully picked, not stock Tailwind */
+  --color-brand-50: #e7f4f3;
+  --color-brand-100: #cbe8e6;
+  --color-brand-500: #1fa39a;
+  /* brand-600 is the interactive default. Contrast on white ≈ 5.16:1 (WCAG AA). */
+  --color-brand-600: #157a73;
+  --color-brand-700: #10635e;
+  --color-brand-800: #0a413e;
+
+  --color-ink: #0e2a3d;
+  --color-ink-muted: #5b6b77;
+  /* ink-soft — lightest text tone, still WCAG AA on the bg (≈ 4.94:1). */
+  --color-ink-soft: #607080;
+
+  --color-bg: #fbfaf6;
+  --color-bg-alt: #edf4f5;
+  --color-line: #e4e7ea;
+  --color-line-strong: #cfd5da;
+
+  --color-success: #196f4a;
+  --color-danger: #b23b3b;
+  --color-warn: #c9862b;
+
+  --font-sans:
+    var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  --shadow-card: 0 1px 2px rgba(14, 42, 61, 0.04),
+    0 4px 12px rgba(14, 42, 61, 0.05);
+
+  --container-6xl: 72rem;
+}
+
+/* Fluid type scale, mobile-first */
+:root {
+  --step-body: 1rem;               /* 16px */
+  --step-small: 0.875rem;          /* 14px */
+  --step-h3: clamp(1.125rem, 0.9rem + 0.7vw, 1.375rem);
+  --step-h2: clamp(1.375rem, 1rem + 1.6vw, 2rem);
+  --step-h1: clamp(1.75rem, 1.1rem + 2.6vw, 2.75rem);
+  --step-display: clamp(2.25rem, 1.2rem + 4.4vw, 3.5rem);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: var(--step-body);
+  line-height: 1.6;
+  font-feature-settings: "cv11", "ss01";
+}
+
+h1, h2, h3, h4 {
+  color: var(--color-ink);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+}
+
+h1, h2 {
+  text-wrap: balance;
+}
+
+/* A touch tighter on the very largest sizes, for a more premium feel. */
+h1 {
+  letter-spacing: -0.02em;
+}
+
+/* Consistent, visible focus for keyboard users */
+:focus-visible {
+  outline: 2px solid var(--color-brand-600);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Skip-link (visually hidden until focused) */
+.skip-link {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 0.75rem 1rem;
+  background: var(--color-ink);
+  color: #fff;
+  border-radius: 0 0 var(--radius-md) 0;
+  transform: translateY(-100%);
+  transition: transform 120ms ease;
+  z-index: 60;
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
